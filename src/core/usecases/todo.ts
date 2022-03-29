@@ -1,5 +1,3 @@
-import { Cookie } from "core/usecases/repositories/cookie"
+import { Todo } from "core/domains/models/todo"
 
-const createTodo = (r: Cookie) => {
-    r.c.get("todo")
-}
+export type CreateTodo = (e: Todo) => Todo
