@@ -1,7 +1,7 @@
 import { Todo } from 'core/domains/models/todo'
 import Cookies from 'js-cookie'
 
-type ITodoRepository = {
+export type ITodoRepository = {
     findById: (id: Todo['id']) => Todo
     create: (title: string, description: string) => Todo
 }
