@@ -71,3 +71,7 @@ https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html#:~:
 
 - 一番外側の層は、一般的にデータベースやWebフレームワークなどのフレームワークやツールで構成されています。一般的に、このレイヤーでは、次のサークル内と通信するためのグルーコード以外、あまりコードを書きません。
 https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html#:~:text=The%20outermost%20layer%20is%20generally%20composed%20of%20frameworks%20and%20tools%20such%20as%20the%20Database%2C%20the%20Web%20Framework%2C%20etc.%20Generally%20you%20don%E2%80%99t%20write%20much%20code%20in%20this%20layer%20other%20than%20glue%20code%20that%20communicates%20to%20the%20next%20circle%20inwards.
+
+## viewの考察 mvvm, mvp, mvc, humble view, supervising controller
+
+https://qiita.com/nrslib/items/a5f902c4defc83bd46b8#view-%E3%81%AE%E5%86%8D%E7%8F%BE

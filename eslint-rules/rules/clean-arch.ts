@@ -45,25 +45,24 @@ const cleanArch: TSESLint.RuleModule<"cleanArch", []> = {
         const importLayer = splitImportPaths[1];
 
         // HACK: 関数分ける
-        if (layer === "domains") {
+        if (layer === "entities") {
           if (
             importLayer === "usecases" ||
-            importLayer === "adapters" ||
-            importLayer === "infrastructures" ||
-            importLayer === "view-models"
+            importLayer === "interfaceAdapters" ||
+            importLayer === "frameworksAndDrivers"
           ) {
             context.report({
               node,
               messageId: "cleanArch",
               data: {
-                message: `domainsでは${importLayer}のモジュールをインポートできないよ`,
+                message: `entitiesでは${importLayer}のモジュールをインポートできないよ`,
               },
             });
           }
         }
 
         if (layer === "usecases") {
-          if (importLayer === "adapters" || importLayer === "infrastructures") {
+          if (importLayer === "interfaceAdapters" || importLayer === "frameworksAndDrivers") {
             context.report({
               node,
               messageId: "cleanArch",
@@ -74,12 +73,8 @@ const cleanArch: TSESLint.RuleModule<"cleanArch", []> = {
           }
         }
 
-        if (layer === "view-models") {
-          if (
-            importLayer === "adapters" ||
-            importLayer === "infrastructures" ||
-            importLayer === "usecases"
-          ) {
+        if (layer === "interfaceAdapters") {
+          if (importLayer === "frameworksAndDrivers") {
             context.report({
               node,
               messageId: "cleanArch",

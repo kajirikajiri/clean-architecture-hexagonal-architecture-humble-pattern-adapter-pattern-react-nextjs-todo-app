@@ -44,8 +44,9 @@ const cleanArch = {
                 const layer = splitPaths[layerIndex];
                 const importLayer = splitImportPaths[1];
                 // HACK: 関数分ける
-                if (layer === "domains") {
-                    if (importLayer === "usecases" ||
+                if (layer === "entities") {
+                    if (importLayer === "frameworksAndDrivers" ||
+                        importLayer === "usecases" ||
                         importLayer === "adapters" ||
                         importLayer === "infrastructures" ||
                         importLayer === "view-models") {

@@ -1,4 +1,4 @@
-import { Todo } from 'core/entities/domains/todo'
+import { Todo } from 'core/entities/todo'
 import Cookies from 'js-cookie'
 
 export type ITodoRepository = {
