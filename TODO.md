@@ -1,4 +1,5 @@
 # メモ
+- eslint-rulesの境界線を修正
 - mswはuseSWR次第
     - useSWRを使えるかなー。getはいいけど、updateとかどうすれば？って思った
 # eslintのルールを作る
