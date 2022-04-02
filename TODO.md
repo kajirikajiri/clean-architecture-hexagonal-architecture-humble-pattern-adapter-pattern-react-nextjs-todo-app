@@ -1,3 +1,6 @@
+# メモ
+- mswはuseSWR次第
+    - useSWRを使えるかなー。getはいいけど、updateとかどうすれば？って思った
 # eslintのルールを作る
 - 作り方
 https://zenn.dev/nus3/articles/b2bc110efd0887442c11
