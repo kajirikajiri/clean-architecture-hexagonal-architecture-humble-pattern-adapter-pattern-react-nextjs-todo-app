@@ -75,3 +75,19 @@ https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html#:~:
 ## viewの考察 mvvm, mvp, mvc, humble view, supervising controller
 
 https://qiita.com/nrslib/items/a5f902c4defc83bd46b8#view-%E3%81%AE%E5%86%8D%E7%8F%BE
+
+## redux best practice
+
+色々見るとユーザーのアクションに基づいてactionの単位を決める。っぽい。が、actorになりうるものであればactionの単位に含めてみる。
+https://github.com/reduxjs/redux/issues/1171#issuecomment-167615246
+
+パラメータ形式はflux-standard-actionで定義されているものを使う
+https://github.com/redux-utilities/flux-standard-action
+https://qiita.com/yasuhiro-okada-aktsk/items/a14f7f37262fb6cf0bf8#action-%E3%81%AE%E6%A7%8B%E9%80%A0
+
+/*
+ * type: '',      // must アクションタイプ
+ * payload: {},   // optional 主なデータ
+ * meta?: {},     // optional 追加情報
+ * error?:        // optional エラーかどうか
+ */
