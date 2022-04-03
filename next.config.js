@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
 
   // useReducerがどうやっても２回描画されるのでoff
   // https://github.com/facebook/react/issues/16295
@@ -7,5 +7,3 @@ const nextConfig = {
   // reactStrictMode: true,
 
 }
-
-module.exports = nextConfig

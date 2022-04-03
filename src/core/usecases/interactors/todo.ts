@@ -1,4 +1,4 @@
-import { CloneTodo, CreateTodo, DeleteTodo, GetAllTodo, GetTodo, UpdateTodo } from "core/usecases/interfaces/todo"
+import { CloneTodo, CreateTodo, DeleteTodo, GetAllTodo, GetTodo, TodoInteractor, UpdateTodo } from "src/core/usecases/interfaces/todo"
 
 const cloneTodo: CloneTodo = (r, id) => {
     return r.clone(id)
@@ -18,7 +18,8 @@ const getTodo: GetTodo = (r, id) => {
 const updateTodo: UpdateTodo = (r, id, todo) => {
     return r.update(id, todo)
 }
-export const todoInteractor = {
+
+export const todoInteractor: TodoInteractor = {
     cloneTodo,
     createTodo,
     deleteTodo,

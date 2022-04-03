@@ -1,12 +1,11 @@
-import { GetTodos } from 'core/frameworksAndDrivers/server/todos';
 import { MockedRequest, ResponseResolver, restContext } from 'msw';
-import { getFormatDate } from 'utils/scripts/getFormatDate';
+import { getFormatDate } from 'src/utils/scripts/getFormatDate';
 
 
 export const mockGetTodos: ResponseResolver<MockedRequest, typeof restContext> =
   async (_, res, ctx) => {
     const date = getFormatDate()
-      const data: GetTodos = {
+      const data: any = {
           todos: [
               {
                   id: '1',

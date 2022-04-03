@@ -1,1 +1,1 @@
-export {default} from 'presenters/index'
+export {default} from 'src/presenters/index'

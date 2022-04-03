@@ -1,6 +1,8 @@
-import { Todo } from "core/entities/todo"
-import { PageProps as OutputPort } from "presenters/index"
+import { Todo } from "src/core/entities/todo"
+import { PageProps as OutputPort } from "src/presenters/index"
 import { Dispatch, useReducer } from "react"
+import { TodoInteractor } from "src/core/usecases/interfaces/todo"
+import { ITodoRepository } from "src/core/frameworksAndDrivers/interfaces/todo"
 
 export type Action = OnloadAction | DeleteAction | CloneAction | UpdateTitleAction | UpdateDescriptionAction | AddAction | ClearAction
 
@@ -8,6 +10,11 @@ type OnloadAction = {
     type: 'onload'
     payload: {
         todos: Todo[]
+    }
+    meta: {
+        dispatch: Dispatch<Action>
+        todoInteractor: TodoInteractor
+        todoRepository: ITodoRepository
     }
 }
 
@@ -58,7 +65,69 @@ type AddAction = {
 
 const reducer = (state: OutputPort, action: Action): OutputPort => {
     if (action.type === 'onload') {
+        const{todoInteractor, todoRepository, dispatch} =action.meta
         state.todos = action.payload.todos
+        state.headerProps = {
+            handleAdd: () => {
+                const todo = todoInteractor.createTodo(todoRepository, '', '')
+                dispatch({
+                    type: 'add',
+                    payload: {
+                        todo,
+                    }
+                })
+            }
+        }
+        state.todosActions = {
+            handleClone: (id) => {
+                const todos = todoInteractor.cloneTodo(todoRepository, id)
+                dispatch({
+                    type: 'clone',
+                    payload: {
+                        todos,
+                    }
+                })
+            },
+            handleDelete: (id) => {
+                const todos = todoInteractor.deleteTodo(todoRepository, id)
+                dispatch({
+                    type: 'delete',
+                    payload: {
+                        todos,
+                    }
+                })
+            },
+            handleChangeDescription: (id, description) => {
+                const todo = todoInteractor.updateTodo(todoRepository, id, { description })
+                dispatch({
+                    type: 'updateDescription',
+                    payload: {
+                        id,
+                        todo,
+                    }
+                })
+            },
+            handleChangeTitle: (id, title) => {
+                const todo = todoInteractor.updateTodo(todoRepository, id, { title })
+                dispatch({
+                    type: 'updateTitle',
+                    payload: {
+                        id,
+                        todo,
+                    }
+                })
+            },
+            handleClear: (id) => {
+                const todo = todoInteractor.updateTodo(todoRepository, id, { title: '', description: '' })
+                dispatch({
+                    type: 'clear',
+                    payload: {
+                        id,
+                        todo,
+                    }
+                })
+            }
+        }
         return state
     }
     if (state.todos === undefined) {
@@ -93,7 +162,9 @@ const reducer = (state: OutputPort, action: Action): OutputPort => {
 }
 
 const initialState: OutputPort = {
-    todos: undefined
+    todos: undefined,
+    headerProps: undefined,
+    todosActions: undefined,
 }
 
 export const useController = (): [OutputPort, Dispatch<Action>] => useReducer(reducer, initialState)

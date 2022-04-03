@@ -1,7 +1,7 @@
-import { Todo } from 'core/entities/todo'
-import { ITodoRepository } from 'core/frameworksAndDrivers/interfaces/todo'
+import { Todo } from 'src/core/entities/todo'
+import { ITodoRepository } from 'src/core/frameworksAndDrivers/interfaces/todo'
 import Cookies from 'js-cookie'
-import { getFormatDate } from 'utils/scripts/getFormatDate'
+import { getFormatDate } from 'src/utils/scripts/getFormatDate'
 import { v4 } from 'uuid'
 
 export const cookieTodoRepository: ITodoRepository = {

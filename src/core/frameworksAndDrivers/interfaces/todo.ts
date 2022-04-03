@@ -1,4 +1,4 @@
-import { Todo } from "core/entities/todo"
+import { Todo } from "src/core/entities/todo"
 
 export type ITodoRepository = {
     getAll: () => Todo[]
