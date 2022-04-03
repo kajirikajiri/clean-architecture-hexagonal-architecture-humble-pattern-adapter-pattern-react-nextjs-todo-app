@@ -23,8 +23,8 @@ describe("clean-arch rule test", () => {
     ],
     invalid: [
       {
-        filename: "src/core/domains/foo.ts",
-        code: `import { FooImpl } from 'core/adapters/foo'`,
+        filename: "src/core/entities/foo.ts",
+        code: `import { FooImpl } from 'core/usecases/foo'`,
         errors: [{ messageId: "cleanArch" }],
       },
     ],
