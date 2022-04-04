@@ -54,6 +54,7 @@ export const mockTodoRepository: ITodoRepository = {
         }]
     },
     update: (id: string, todo: Partial<Omit<Todo, "id">>) => {
+        console.log(57,todo.description)
         return {
             id,
             createdAt: todo.createdAt || '',

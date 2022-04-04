@@ -99,6 +99,7 @@ const reducer = (state: OutputPort, action: Action): OutputPort => {
             },
             handleChangeDescription: (id, description) => {
                 const todo = todoInteractor.updateTodo(todoRepository, id, { description })
+                console.log(102,todo)
                 dispatch({
                     type: 'updateDescription',
                     payload: {
@@ -147,6 +148,7 @@ const reducer = (state: OutputPort, action: Action): OutputPort => {
             console.error('todo not found')
             return state
         }
+        console.log(150,action.payload.todo)
         state.todos[index] = action.payload.todo
         return {
             ...state,
