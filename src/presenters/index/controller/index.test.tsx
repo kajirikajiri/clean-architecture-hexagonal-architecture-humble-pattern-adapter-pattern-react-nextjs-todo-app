@@ -1,7 +1,9 @@
-import { todoInteractor } from "src/core/usecases/interactors/todo"
 import { mockTodoRepository as todoRepository } from "src/core/frameworksAndDrivers/mock/todo"
 import { renderHook, act } from '@testing-library/react-hooks'
 import { useController } from 'src/presenters/index/controller'
+import { injectTodoDependency } from "src/core/usecases/interactors/todo"
+
+const todoInteractor = injectTodoDependency(todoRepository)
 
 test(`onload:描画される値が正しいこと`, () => {
     const {result} = renderHook(() => useController())
@@ -15,7 +17,6 @@ test(`onload:描画される値が正しいこと`, () => {
             meta: {
                 dispatch,
                 todoInteractor,
-                todoRepository,
             }
         })
     })
@@ -34,7 +35,6 @@ test(`handleClear:描画される値が正しいこと`, () => {
             meta: {
                 dispatch,
                 todoInteractor,
-                todoRepository,
             }
         })
         state.todosActions?.handleClear && state.todosActions.handleClear('1')
@@ -54,7 +54,6 @@ test(`handleChangeDescription:描画される値が正しいこと`, () => {
             meta: {
                 dispatch,
                 todoInteractor,
-                todoRepository,
             }
         })
         state.todosActions?.handleChangeDescription && state.todosActions.handleChangeDescription('1', 'new description')

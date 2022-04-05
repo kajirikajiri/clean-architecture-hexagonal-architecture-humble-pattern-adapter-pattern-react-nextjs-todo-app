@@ -5,7 +5,7 @@ import { getFormatDate } from 'src/utils/scripts/getFormatDate'
 import { v4 } from 'uuid'
 
 export const cookieTodoRepository: ITodoRepository = {
-    getAll: () => {
+    get: () => {
         let todos: Todo[] = []
         try {
             todos = JSON.parse(Cookies.get('todos') as any) as Todo[] || []
@@ -13,15 +13,6 @@ export const cookieTodoRepository: ITodoRepository = {
             console.error(error)
         }
         return todos
-    },
-    get: (id) => {
-        const todos = JSON.parse(Cookies.get('todos') as any) as Todo[]
-        const todo = todos.find(t => t.id === id)
-        if (todo === undefined) {
-            throw new Error('todo not found')
-        }
-        
-        return todo
     },
     create: (title, description) => {
         let todos: Todo[] = []
@@ -65,17 +56,4 @@ export const cookieTodoRepository: ITodoRepository = {
         Cookies.set('todos', JSON.stringify(todos))
         return todos
     },
-    clone: (id) => {
-        const todos = JSON.parse(Cookies.get('todos') as any) as Todo[]
-        const todo = todos.find(t => t.id === id)
-        if (todo === undefined) {
-            throw new Error('todo not found')
-        }
-        todos.unshift({
-            ...todo,
-            id: v4(),
-        })
-        Cookies.set('todos', JSON.stringify(todos))
-        return todos
-    }
 }

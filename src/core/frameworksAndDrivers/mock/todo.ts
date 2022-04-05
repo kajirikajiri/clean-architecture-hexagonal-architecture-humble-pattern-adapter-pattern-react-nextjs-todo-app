@@ -2,17 +2,6 @@ import { Todo } from "src/core/entities/todo";
 import { ITodoRepository } from "src/core/frameworksAndDrivers/interfaces/todo";
 
 export const mockTodoRepository: ITodoRepository = {
-    clone: (id: string) => {
-        return [
-            {
-            id: id,
-            title: '',
-            description: '',
-            createdAt: '',
-            doneAt: '',
-            updatedAt: '',
-        }]
-    },
     create: (title: string, description: string) => {
         return {
             id: '',
@@ -33,17 +22,7 @@ export const mockTodoRepository: ITodoRepository = {
             updatedAt: '',
         }]
     },
-    get: (id: string) => {
-        return {
-            id,
-            title: '',
-            description: '',
-            createdAt: '',
-            doneAt: '',
-            updatedAt: '',
-        }
-    },
-    getAll: () => {
+    get: () => {
         return [{
             id: '',
             title: '',
@@ -54,7 +33,6 @@ export const mockTodoRepository: ITodoRepository = {
         }]
     },
     update: (id: string, todo: Partial<Omit<Todo, "id">>) => {
-        console.log(57,todo.description)
         return {
             id,
             createdAt: todo.createdAt || '',
