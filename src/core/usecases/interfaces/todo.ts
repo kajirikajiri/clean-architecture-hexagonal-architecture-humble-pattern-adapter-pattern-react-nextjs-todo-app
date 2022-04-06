@@ -1,20 +1,32 @@
-import { Todo } from "src/core/entities/todo"
-import { ITodoRepository } from "src/core/frameworksAndDrivers/interfaces/todo"
-
-type GetAll = () => Todo[]
-type Get = (id: Todo['id']) => Todo
-type Create = (title: Todo['title'], description: Todo['description']) => Todo
-type Update = (id: Todo['id'], todo: Partial<Omit<Todo, 'id'>>) => Todo
-type Delete = (id: Todo['id']) => Todo[]
-type Clone = (id: Todo['id']) => Todo[]
+import { Todo } from "src/core/entities/todo";
+import {
+  IPromiseTodoRepository,
+  ITodoRepository,
+} from "src/core/frameworksAndDrivers/interfaces/todo";
 
 export type ITodoInteractor = {
-    getAll: GetAll;
-    get: Get;
-    create: Create;
-    update: Update;
-    delete: Delete;
-    clone: Clone;
-}
+  getAll: () => Todo[];
+  get: (id: Todo["id"]) => Todo;
+  create: (title: Todo["title"], description: Todo["description"]) => Todo;
+  update: (id: Todo["id"], todo: Partial<Omit<Todo, "id">>) => Todo;
+  delete: (id: Todo["id"]) => Todo[];
+  clone: (id: Todo["id"]) => Todo[];
+};
 
-export type ITodoDependencyInJector = (r: ITodoRepository) => ITodoInteractor
+export type ITodoDependencyInJector = (r: ITodoRepository) => ITodoInteractor;
+
+export type IPromiseTodoInteractor = {
+  getAll: () => Promise<Todo[]>;
+  get: (id: Todo["id"]) => Promise<Todo>;
+  create: (
+    title: Todo["title"],
+    description: Todo["description"]
+  ) => Promise<Todo>;
+  update: (id: Todo["id"], todo: Partial<Omit<Todo, "id">>) => Promise<Todo>;
+  delete: (id: Todo["id"]) => Promise<Todo[]>;
+  clone: (id: Todo["id"]) => Promise<Todo[]>;
+};
+
+export type IPromiseTodoDependencyInJector = (
+  r: IPromiseTodoRepository
+) => IPromiseTodoInteractor;

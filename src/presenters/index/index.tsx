@@ -1,34 +1,49 @@
-import { Todo } from "src/core/entities/todo"
-import { cookieTodoRepository as todoRepository } from "src/core/frameworksAndDrivers/web/js-cookie/todo"
-import { injectTodoDependency } from "src/core/usecases/interactors/todo"
-import { useController } from "src/presenters/index/controller"
-import { LayoutPresenter } from "src/presenters/index/layoutPresenter"
-import { HeaderProps } from "src/presenters/index/layoutPresenter/header"
-import { TodosProps } from "src/presenters/index/layoutPresenter/todo"
+import { Todo } from "src/core/entities/todo";
+import { cookieTodoRepository as todoRepository } from "src/core/frameworksAndDrivers/web/js-cookie/todo";
+import { injectTodoDependency } from "src/core/usecases/interactors/todo";
+import { useController } from "src/presenters/index/controller";
+import { Template } from "src/presenters/index/template";
+import { HeaderProps } from "src/presenters/index/template/organism/header";
+import { TodosProps } from "src/presenters/index/template/organism/todo";
 
 export type PageProps = {
-    todos: Todo[] | undefined
-    headerProps: HeaderProps | undefined
-    todosActions: Omit<TodosProps, 'todos'> | undefined
-}
+  state: {
+    todos: Todo[] | undefined;
+    mode: "readable" | "writable" | "readable:select" | undefined;
+    selectedTodoIds: Todo["id"][] | undefined;
+  };
+  headerEventHandler: HeaderProps["eventHandler"];
+  todosEventHandler: TodosProps["eventHandler"];
+};
 
-export default function Page () {
-    const [state, dispatch] = useController()
-    if (state.todos === undefined) {
-        const todoInteractor = injectTodoDependency(todoRepository)
-        dispatch({
-            type: 'onload',
-            payload: {
-                todos: todoInteractor.getAll()
-            },
-            meta: {
-                dispatch,
-                todoInteractor,
-            }
-        })
-    }
-    return <>
-        <LayoutPresenter
-        todosProps={{...state.todosActions, todos: state.todos}} headerProps={state.headerProps}/>
+export default function Page() {
+  const [state, dispatch] = useController();
+  if (state.state.todos === undefined) {
+    const todoInteractor = injectTodoDependency(todoRepository);
+    dispatch({
+      type: "onload",
+      payload: {
+        todos: todoInteractor.getAll(),
+        mode: "readable",
+      },
+      meta: {
+        dispatch,
+        todoInteractor,
+      },
+    });
+  }
+  return (
+    <>
+      <Template
+        todosProps={{
+          eventHandler: state.todosEventHandler,
+          state: state.state,
+        }}
+        headerProps={{
+          eventHandler: state.headerEventHandler,
+          state: state.state,
+        }}
+      />
     </>
+  );
 }
